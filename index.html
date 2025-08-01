@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Untuk Wawa</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 1.2rem;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #e74c3c;
+      font-weight: 500;
+      font-size: 1.8rem;
+    }
+
+    .message {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    .photos {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .photo {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      width: 100px;
+      height: 130px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo:hover {
+      transform: translateY(-5px) scale(1.04);
+    }
+
+    .photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.15));
+      border-radius: 12px;
+    }
+
+    .photos::-webkit-scrollbar {
+      display: none;
+    }
+
+    .photos {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0.8rem auto 0;
+      display: block;
+      box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.5rem;
+      color: #e74c3c;
+      animation: float 4s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-80px) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="fade-in">untuk wawa yg imut kyut</h1>
+
+    <div class="message fade-in" id="initialMessage">
+      dunia gaperlu tau wawa siapa, tapi dunia harus tau wawa itu istimewa.
+    </div>
+
+    <div class="message hidden" id="secondMessage">
+      seluas apapun lautan dan pegunungan, tapi tidak ada yg seindah kamu.<br />
+      kamu pelengkap dari keindahan alam itu.<br />
+      walaupun kamu pendek, tapi kecantikan kamu melebihi dari ketinggian 8448 mdpl.
+    </div>
+
+    <div class="message hidden" id="thirdMessage">
+      klik salah satu foto untuk melihat kejutan yg ga ada apanya wkwk
+      <br><br>
+      <small>*klik tombol 'lanjut ke galeri' untuk melihat lebih jelas</small>
+    </div>
+
+    <div class="photos" id="photos">
+      <div class="photo" style="background-image: url('coverdepan.jpg')" onclick="animatePhoto(this)"></div>
+      <div class="photo" style="background-image: url('coverdepan2.jpg')" onclick="animatePhoto(this)"></div>
+      <div class="photo" style="background-image: url('coverdepan3.jpg')" onclick="animatePhoto(this)"></div>
+      <div class="photo" style="background-image: url('coverdepan4.jpg')" onclick="animatePhoto(this)"></div>
+    </div>
+
+    <button class="btn fade-in" onclick="nextMessage()">lanjut</button>
+  </div>
+
+  <script>
+    const messages = ['initialMessage', 'secondMessage', 'thirdMessage'];
+    let currentIndex = 0;
+
+    function nextMessage() {
+      document.getElementById(messages[currentIndex]).classList.add('hidden');
+      currentIndex = (currentIndex + 1) % messages.length;
+
+      setTimeout(() => {
+        document.getElementById(messages[currentIndex]).classList.remove('hidden');
+
+        const btn = document.querySelector('.btn');
+        if (currentIndex === messages.length - 1) {
+          btn.textContent = 'lanjut ke galeri';
+          btn.onclick = () => {
+            window.location.href = 'gallery.html';
+          };
+        } else {
+          btn.textContent = 'lanjut';
+          btn.onclick = nextMessage;
+        }
+      }, 200);
+    }
+
+    function animatePhoto(photo) {
+      photo.style.transform = 'scale(1.05)';
+      photo.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.2)';
+      createHearts(8);
+      setTimeout(() => {
+        photo.style.transform = '';
+        photo.style.boxShadow = '';
+      }, 400);
+    }
+
+    function createHearts(count) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '🫶';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.top = `${Math.random() * 100}%`;
+        heart.style.animationDuration = `${2 + Math.random() * 2}s`;
+        document.querySelector('.container').appendChild(heart);
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      }
+    }
+
+    document.querySelectorAll('.fade-in').forEach((el, index) => {
+      el.style.animationDelay = `${index * 0.2}s`;
+    });
+  </script>
+</body>
+</html>

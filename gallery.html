@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeri Kita</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #e74c3c;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-back {
+      margin-top: 2rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn-back:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .btn-back:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 600px) {
+      .gallery img {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>kenangan berdua</h1>
+
+  <div class="gallery">
+    <!-- Ganti src sesuai dengan gambar kamu -->
+    <img src="coverdepan.jpg" alt="Kenangan 1" />
+    <img src="coverdepan2.jpg" alt="Kenangan 2" />
+    <img src="coverdepan3.jpg" alt="Kenangan 3" />
+    <img src="coverdepan4.jpg" alt="Kenangan 4" />
+  </div>
+
+  <button class="btn-back" onclick="window.location.href='index.html'">
+    Kembali ke Awal
+  </button>
+</body>
+</html>
